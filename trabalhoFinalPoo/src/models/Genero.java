@@ -1,7 +1,8 @@
 package models;
 
 public class Genero {
-
+	
+	private Integer id;
 	public String nome;
 	public String descricao;
 	
@@ -19,6 +20,14 @@ public class Genero {
 	
 	public String getDescricao(){
 		return descricao;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 }

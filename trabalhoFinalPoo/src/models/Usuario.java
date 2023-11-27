@@ -1,13 +1,16 @@
 package models;
 import java.util.List;
 
-public class Usuario extends Emprestimo {
-
-	public String email;
+public class Usuario {
+	private Integer Id;
+	private String email;
 	public String senha;
 	public Boolean isAdmin;
 	public List<Emprestimo> historicoEmprestimo;
 	
+	public void setId(Integer id) {
+		Id = id;
+	}
 	
 	public void setEmail(String email) {
 		this.email = email;
@@ -39,6 +42,10 @@ public class Usuario extends Emprestimo {
 	
 	public List<Emprestimo> getHistoricoEmprestimo(){
 		return historicoEmprestimo;
+	}
+
+	public Integer getId() {
+		return Id;
 	}
 	
 }
