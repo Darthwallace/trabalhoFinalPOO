@@ -87,6 +87,16 @@ public class UsuarioDAO implements Entity<Usuario>{
 
 	    return null; 
 	}
+	
+	public Usuario findyByEmailAndPassword(String email, String senha) {
+		 for (Usuario usuario : listaDeUsuarios) {
+		        if (usuario.getEmail() == email && usuario.getSenha() == senha) {
+		            return usuario;
+		        }
+		    }
+
+	    return null; 
+	}
 
 	@Override
 	public ArrayList<Usuario> selectAll() {

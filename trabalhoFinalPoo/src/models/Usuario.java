@@ -2,7 +2,10 @@ package models;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Usuario extends Pessoa {
+import dao.UsuarioDAO;
+import interfaces.Login;
+
+public class Usuario extends Pessoa implements Login {
 	public Usuario(String nome, String dataNascimento,
 					Integer id, String email,
 					String senha, Boolean isAdmin,List<Emprestimo> historicoEmprestimo) {
@@ -60,6 +63,14 @@ public class Usuario extends Pessoa {
 
 	public Integer getId() {
 		return Id;
+	}
+
+	@Override
+	public boolean login(String email, String password, UsuarioDAO usuario) {
+		Usuario user = usuario.findyByEmailAndPassword(email, password);
+		if (user != null) return true;
+		else return false;
+		
 	}
 	
 }

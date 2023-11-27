@@ -13,12 +13,12 @@ public class Livro extends Genero {
 		this.genero = genero;
 	}
 
-	public String titulo;
-	public String autor;
-	public String isbn;      
-	public String editora;
-	public String anoPublicacao;
-	public Genero genero;
+	private String titulo;
+	private String autor;
+	private String isbn;      
+	private String editora;
+	private String anoPublicacao;
+	private Genero genero;
 	
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
