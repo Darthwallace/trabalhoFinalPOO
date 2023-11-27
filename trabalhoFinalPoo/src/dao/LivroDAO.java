@@ -34,24 +34,24 @@ public class LivroDAO implements Entity<Livro> {
 	}
 
 	@Override
-	public void update(int id, Livro objeto) {
+	public void update(Livro objeto) {
 	    boolean encontrado = false;
 
 	    for (Livro livro : listaDeLivros) {
-	        if (livro.getId() == id) {
+	        if (livro.getId() == objeto.getId()) {
 	            encontrado = true;
 	            livro.setNome(objeto.getNome());
 	            livro.setDescricao(objeto.getDescricao());
 	            livro.setAutor(objeto.getAutor());
 
 	        
-	            System.out.println("livro com ID " + id + " atualizado com sucesso.");
+	            System.out.println("livro com ID " + objeto.getId() + " atualizado com sucesso.");
 	            break;
 	        }
 	    }
 
 	    if (!encontrado) {
-	        System.out.println("livro com ID " + id + " não encontrado para atualização.");
+	        System.out.println("livro com ID " + objeto.getId() + " não encontrado para atualização.");
 	    }
 	}
 

@@ -33,24 +33,24 @@ public class EmprestimoDAO implements Entity<Emprestimo>{
 	}
 
 	@Override
-	public void update(int id, Emprestimo novoEmprestimo) {
+	public void update(Emprestimo novoEmprestimo) {
 	    boolean encontrado = false;
 
 	    for (Emprestimo emprestimo : listaDeEmprestimos) {
-	        if (emprestimo.getId() == id) {
+	        if (emprestimo.getId() == novoEmprestimo.getId()) {
 	            encontrado = true;
 	            emprestimo.setLivro(novoEmprestimo.getLivro());
 	            emprestimo.setDataEmprestimo(novoEmprestimo.getDataEmprestimo());
 	            emprestimo.setStatus(novoEmprestimo.getStatus());
 	            emprestimo.setDataDevolucaoPrevista(novoEmprestimo.getDataDevolucao());
 
-	            System.out.println("Empréstimo com ID " + id + " atualizado com sucesso.");
+	            System.out.println("Empréstimo com ID " + novoEmprestimo.getId() + " atualizado com sucesso.");
 	            break;
 	        }
 	    }
 
 	    if (!encontrado) {
-	        System.out.println("Empréstimo com ID " + id + " não encontrado para atualização.");
+	        System.out.println("Empréstimo com ID " + novoEmprestimo.getId() + " não encontrado para atualização.");
 	    }
 		
 	}

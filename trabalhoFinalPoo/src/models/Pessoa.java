@@ -2,9 +2,13 @@ package models;
 import java.time.LocalDate;
 
 public class Pessoa {
+	public Pessoa(String nome, String dataNascimento) {
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+	}
 
-	public String nome;
-	public LocalDate dataNascimento;
+	private String nome;
+	private String dataNascimento;
 	
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -14,13 +18,12 @@ public class Pessoa {
 		return nome;
 	}
 	
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	
-	public LocalDate getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
-	
-	
+
 }

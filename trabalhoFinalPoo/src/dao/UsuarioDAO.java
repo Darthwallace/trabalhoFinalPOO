@@ -34,24 +34,24 @@ public class UsuarioDAO implements Entity<Usuario>{
 	}
 
 	@Override
-	public void update(int id, Usuario objeto) {
+	public void update(Usuario objeto) {
 	    boolean encontrado = false;
 
 	    for (Usuario usuario : listaDeUsuarios) {
-	        if (usuario.getId() == id) {
+	        if (usuario.getId() == objeto.getId()) {
 	            encontrado = true;
 	            usuario.setEmail(usuario.getEmail());
 	            usuario.setSenha(usuario.getSenha());
 	            usuario.setIsAdmin(usuario.getIsAdmin());
 
 	        
-	            System.out.println("Usuario com ID " + id + " atualizado com sucesso.");
+	            System.out.println("Usuario com ID " + objeto.getId() + " atualizado com sucesso.");
 	            break;
 	        }
 	    }
 
 	    if (!encontrado) {
-	        System.out.println("Usuario com ID " + id + " não encontrado para atualização.");
+	        System.out.println("Usuario com ID " + objeto.getId() + " não encontrado para atualização.");
 	    }
 		
 	}

@@ -34,22 +34,22 @@ public class GeneroDAO implements Entity<Genero> {
 	}
 
 	@Override
-	public void update(int id, Genero newObjeto) {
+	public void update(Genero newObjeto) {
 	    boolean encontrado = false;
 
 	    for (Genero genero : listaDeGenero) {
-	        if (genero.getId() == id) {
+	        if (genero.getId() == newObjeto.getId()) {
 	            encontrado = true;
 	            genero.setNome(newObjeto.getNome());
 	            genero.setDescricao(newObjeto.getDescricao());
 	        
-	            System.out.println("Genero com ID " + id + " atualizado com sucesso.");
+	            System.out.println("Genero com ID " + newObjeto.getId() + " atualizado com sucesso.");
 	            break;
 	        }
 	    }
 
 	    if (!encontrado) {
-	        System.out.println("Genero com ID " + id + " não encontrado para atualização.");
+	        System.out.println("Genero com ID " + newObjeto.getId() + " não encontrado para atualização.");
 	    }
 		
 	}

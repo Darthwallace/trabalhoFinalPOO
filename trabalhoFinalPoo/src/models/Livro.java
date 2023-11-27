@@ -1,8 +1,17 @@
 package models;
-//import biblioteca.Biblioteca;
-//import usuario.Usuario;
 
 public class Livro extends Genero {
+
+	public Livro(Integer id, String nome, String descricao, String titulo, String autor, String isbn, String editora,
+			String anoPublicacao, Genero genero) {
+		super(id, nome, descricao);
+		this.titulo = titulo;
+		this.autor = autor;
+		this.isbn = isbn;
+		this.editora = editora;
+		this.anoPublicacao = anoPublicacao;
+		this.genero = genero;
+	}
 
 	public String titulo;
 	public String autor;

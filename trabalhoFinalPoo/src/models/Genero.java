@@ -1,11 +1,16 @@
 package models;
 
 public class Genero {
-	
 	private Integer id;
-	public String nome;
-	public String descricao;
+	private String nome;
+	private String descricao;
 	
+	public Genero(Integer id, String nome, String descricao) {
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

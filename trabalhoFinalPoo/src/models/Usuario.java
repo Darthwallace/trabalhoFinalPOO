@@ -1,12 +1,26 @@
 package models;
+import java.time.LocalDate;
 import java.util.List;
 
-public class Usuario {
+public class Usuario extends Pessoa {
+	public Usuario(String nome, String dataNascimento,
+					Integer id, String email,
+					String senha, Boolean isAdmin,List<Emprestimo> historicoEmprestimo) {
+		super(nome, dataNascimento);
+		Id = id;
+		this.email = email;
+		this.senha = senha;
+		this.isAdmin = isAdmin;
+		this.historicoEmprestimo = historicoEmprestimo;
+	}
+
 	private Integer Id;
 	private String email;
 	public String senha;
 	public Boolean isAdmin;
 	public List<Emprestimo> historicoEmprestimo;
+	
+	
 	
 	public void setId(Integer id) {
 		Id = id;
