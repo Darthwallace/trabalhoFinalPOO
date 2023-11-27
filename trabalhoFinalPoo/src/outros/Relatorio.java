@@ -1,4 +1,4 @@
-package Outros;
+package outros;
 //import biblioteca.Livro;
 //import biblioteca.Biblioteca;
 

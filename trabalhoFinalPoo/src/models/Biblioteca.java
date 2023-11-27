@@ -1,6 +1,5 @@
-package biblioteca;
+package models;
 import java.util.List;
-import usuario.Usuario;
 
 public class Biblioteca {
 	

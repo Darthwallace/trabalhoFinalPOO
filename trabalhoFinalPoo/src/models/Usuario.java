@@ -1,9 +1,5 @@
-package usuario;
+package models;
 import java.util.List;
-import biblioteca.Emprestimo;
-//import usuario.Pessoa;
-//import biblioteca.Biblioteca;
-//import usuario.Login;
 
 public class Usuario extends Emprestimo {
 

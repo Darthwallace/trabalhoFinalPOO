@@ -1,4 +1,4 @@
-package biblioteca;
+package models;
 
 public class Genero {
 

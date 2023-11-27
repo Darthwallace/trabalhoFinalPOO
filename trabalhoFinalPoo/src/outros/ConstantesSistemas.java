@@ -1,4 +1,4 @@
-package Outros;
+package outros;
 
 public class ConstantesSistemas {
 

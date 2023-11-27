@@ -1,6 +1,5 @@
-package biblioteca;
+package models;
 import java.time.LocalDate;
-import usuario.Usuario;
 
 public class Emprestimo extends Livro{
 	

@@ -1,6 +1,6 @@
-package interfaceEntity;
+package interfaces;
 
-public interface entity {
+public interface Entity {
 	public void create();
 	public void update();
 	public void delete();

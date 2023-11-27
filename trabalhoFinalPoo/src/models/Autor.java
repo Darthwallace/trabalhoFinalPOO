@@ -1,4 +1,4 @@
-package usuario;
+package models;
 
 public class Autor extends Pessoa {
 	
