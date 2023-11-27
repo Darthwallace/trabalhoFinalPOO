@@ -2,8 +2,6 @@ package models;
 import java.util.List;
 
 public class Biblioteca {
-	
-	
 	public List<Livro> listaLivros;
 	public List<Usuario> listaUsuarios;
 	public List<Emprestimo> listaEmprestimos;

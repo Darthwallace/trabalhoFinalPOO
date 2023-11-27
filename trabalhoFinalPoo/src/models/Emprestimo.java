@@ -1,13 +1,21 @@
 package models;
 import java.time.LocalDate;
 
-public class Emprestimo extends Livro{
+public class Emprestimo{
+	private Integer id;
+	private Integer status;
+	private LocalDate dataEmprestimo;
+	private LocalDate dataDevolucaoPrevista;
+	private Livro livro;
+	private Usuario usuario;
 	
-	public Integer status;
-	public LocalDate dataEmprestimo;
-	public LocalDate dataDevolucaoPrevista;
-	public Livro livro;
-	public Usuario usuario;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public Integer getId(){
+		return id;
+	}
 	
 	public void setStatus(Integer status) {
 		this.status = status;
