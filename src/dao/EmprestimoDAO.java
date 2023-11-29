@@ -4,9 +4,12 @@ import java.util.Iterator;
 
 import interfaces.Entity;
 import models.Emprestimo;
+import models.Livro;
 
 public class EmprestimoDAO implements Entity<Emprestimo>{
-    private ArrayList<Emprestimo> listaDeEmprestimos;
+    private ArrayList<Emprestimo> listaDeEmprestimos = new ArrayList<Emprestimo>();;
+    private int ultimoIdUtilizado = 0;
+    
     
     public ArrayList<Emprestimo> getListaDeEmprestimos() {
 		return listaDeEmprestimos;
@@ -18,7 +21,7 @@ public class EmprestimoDAO implements Entity<Emprestimo>{
 
 	@Override
 	public void create(Emprestimo objeto) {
-		if(objeto != null) {
+		if(objeto == null) {
 			System.err.println("Objeto Inválido!");
 	    	return;
 		} 
@@ -27,6 +30,9 @@ public class EmprestimoDAO implements Entity<Emprestimo>{
 	    	System.err.println("Empréstimo já existe!");
 	    	return;
 	    }
+	    
+	    ultimoIdUtilizado++;
+	    objeto.setId(ultimoIdUtilizado); 
 	  
 		this.listaDeEmprestimos.add(objeto);
 		System.err.println("Empréstimo feito com sucesso!");

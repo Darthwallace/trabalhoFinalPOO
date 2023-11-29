@@ -7,6 +7,8 @@ import models.Usuario;
 
 public class GeneroDAO implements Entity<Genero> {
 	private ArrayList<Genero> listaDeGenero = new ArrayList<Genero>();
+	private int ultimoIdUtilizado = 0;
+	 
 	
 	public ArrayList<Genero> getListaDeGenero() {
 		return listaDeGenero;
@@ -28,6 +30,9 @@ public class GeneroDAO implements Entity<Genero> {
 	    	System.err.println("Gênero já existe!");
 	    	return;
 	    }
+	    
+	    ultimoIdUtilizado++;
+	    objeto.setId(ultimoIdUtilizado);
 	  
 		this.listaDeGenero.add(objeto);
 		System.out.println("Gênero cadastrado com sucesso!");

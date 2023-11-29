@@ -7,7 +7,8 @@ import models.Usuario;
 
 
 public class LivroDAO implements Entity<Livro> {
-	private ArrayList<Livro> listaDeLivros = new ArrayList<Livro>();;
+	private ArrayList<Livro> listaDeLivros = new ArrayList<Livro>();
+	private int ultimoIdUtilizado = 0;
 
 	public ArrayList<Livro> getListaDeLivros() {
 		return listaDeLivros;
@@ -29,6 +30,10 @@ public class LivroDAO implements Entity<Livro> {
 	    	System.err.println("Livro já existe!");
 	    	return;
 	    }
+	    
+	    
+	    ultimoIdUtilizado++;
+	    objeto.setId(ultimoIdUtilizado);
 	  
 		this.listaDeLivros.add(objeto);
 		System.out.println("Livro cadastrado com sucesso!");
@@ -41,10 +46,9 @@ public class LivroDAO implements Entity<Livro> {
 	    for (Livro livro : listaDeLivros) {
 	        if (livro.getId() == objeto.getId()) {
 	            encontrado = true;
-	            livro.setNome(objeto.getNome());
-	            livro.setDescricao(objeto.getDescricao());
+	            livro.setTitulo(objeto.getTitulo());
 	            livro.setAutor(objeto.getAutor());
-
+	         
 	        
 	            System.out.println("livro com ID " + objeto.getId() + " atualizado com sucesso.");
 	            break;

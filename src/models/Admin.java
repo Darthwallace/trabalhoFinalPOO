@@ -1,5 +1,8 @@
 package models;
+import java.util.ArrayList;
 import java.util.List;
+
+import dao.EmprestimoDAO;
 import dao.LivroDAO;
 import dao.UsuarioDAO;
 
@@ -13,11 +16,22 @@ public class Admin extends Usuario {
     			 List<Emprestimo> historicoEmprestimo) {
 		   super(nome, dataNascimento, email, senha, isAdmin, historicoEmprestimo);
 	}
-
+    
+    
 	public void criarUsuario(UsuarioDAO dao, Usuario usuario) {
 		dao.create(usuario);
     }
 
+	public ArrayList<Usuario> listarUsuarios(UsuarioDAO dao) {
+		return dao.selectAll();
+    }
+	
+
+	public ArrayList<Emprestimo> listarEmprestimos(EmprestimoDAO dao) {
+		return dao.selectAll();
+    }
+
+	
     public void deletarUsuario(UsuarioDAO dao, int id) {
     	dao.delete(id);
     }

@@ -1,10 +1,9 @@
 package models;
 
-public class Livro extends Genero {
+public class Livro  {
 
-	public Livro(Integer id, String nome, String descricao, String titulo, String autor, String isbn, String editora,
+	public Livro(String titulo, String autor, String isbn, String editora,
 			String anoPublicacao, Genero genero) {
-		super(id, nome, descricao);
 		this.titulo = titulo;
 		this.autor = autor;
 		this.isbn = isbn;
@@ -13,6 +12,8 @@ public class Livro extends Genero {
 		this.genero = genero;
 	}
 
+	
+	private int id;
 	private String titulo;
 	private String autor;
 	private String isbn;      
@@ -67,5 +68,14 @@ public class Livro extends Genero {
 	public Genero getGenero(){
 		return genero;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	
 }

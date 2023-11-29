@@ -1,11 +1,11 @@
 package models;
-import java.time.LocalDate;
+
 
 public class Emprestimo{
 	private Integer id;
 	private Integer status;
-	private LocalDate dataEmprestimo;
-	private LocalDate dataDevolucaoPrevista;
+	private String dataEmprestimo;
+	private String dataDevolucaoPrevista;
 	private Livro livro;
 	private Usuario usuario;
 	
@@ -13,6 +13,15 @@ public class Emprestimo{
 		this.id = id;
 	}
 	
+	public Emprestimo(Integer status, String dataEmprestimo, String dataDevolucaoPrevista, Livro livro,
+			Usuario usuario) {
+		this.status = status;
+		this.dataEmprestimo = dataEmprestimo;
+		this.dataDevolucaoPrevista = dataDevolucaoPrevista;
+		this.livro = livro;
+		this.usuario = usuario;
+	}
+
 	public Integer getId(){
 		return id;
 	}
@@ -25,19 +34,19 @@ public class Emprestimo{
 		return status;
 	}
 	
-	public void setDataEmprestimo(LocalDate dataEmprestimo) {
+	public void setDataEmprestimo(String dataEmprestimo) {
 		this.dataEmprestimo = dataEmprestimo;
 	}
 	
-	public LocalDate getDataEmprestimo() {
+	public String getDataEmprestimo() {
 		return dataEmprestimo;
 	}
 	
-	public void setDataDevolucaoPrevista(LocalDate dataDevolucaoPrevista) {
+	public void setDataDevolucaoPrevista(String dataDevolucaoPrevista) {
 		this.dataDevolucaoPrevista = dataDevolucaoPrevista;
 	}
 	
-	public LocalDate getDataDevolucao() {
+	public String getDataDevolucao() {
 		return dataDevolucaoPrevista;
 	}
 	
@@ -45,6 +54,13 @@ public class Emprestimo{
 		this.livro = livro;
 	}
 	
+	@Override
+	public String toString() {
+		return "Emprestimo [id=" + id + ", status=" + status + ", dataEmprestimo=" + dataEmprestimo
+				+ ", dataDevolucaoPrevista=" + dataDevolucaoPrevista + ", livro=" + livro.getTitulo() + ", usuario=" + usuario.getNome()
+				+ "]";
+	}
+
 	public Livro getLivro() {
 		return livro;
 	}

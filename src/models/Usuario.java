@@ -60,4 +60,9 @@ public class Usuario extends Pessoa {
 		return Id;
 	}
 
+	@Override
+	public String toString() {
+		return "Usuario [Id=" + Id + ", email=" + email + ", senha=" + senha + ", isAdmin=" + isAdmin
+				+ ", historicoEmprestimo=" + historicoEmprestimo + "]";
+	}
 }
