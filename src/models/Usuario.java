@@ -1,14 +1,11 @@
 package models;
-import java.time.LocalDate;
+
 import java.util.List;
 
-import dao.UsuarioDAO;
-import interfaces.Login;
-
-public class Usuario extends Pessoa implements Login {
+public class Usuario extends Pessoa {
 	public Usuario(String nome, String dataNascimento,
 					Integer id, String email,
-					String senha, Boolean isAdmin,List<Emprestimo> historicoEmprestimo) {
+					String senha, Boolean isAdmin, List<Emprestimo> historicoEmprestimo) {
 		super(nome, dataNascimento);
 		Id = id;
 		this.email = email;
@@ -65,12 +62,12 @@ public class Usuario extends Pessoa implements Login {
 		return Id;
 	}
 
-	@Override
-	public boolean login(String email, String password, UsuarioDAO usuario) {
-		Usuario user = usuario.findyByEmailAndPassword(email, password);
-		if (user != null) return true;
-		else return false;
-		
-	}
+//	@Override
+//	public boolean login(String email, String password, UsuarioDAO usuario) {
+//		Usuario user = usuario.findyByEmailAndPassword(email, password);
+//		if (user != null) return true;
+//		else return false;
+//		
+//	}
 	
 }

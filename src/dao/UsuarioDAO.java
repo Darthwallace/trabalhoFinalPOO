@@ -1,12 +1,12 @@
 package dao;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import interfaces.Entity;
 import models.Usuario;
 
-
 public class UsuarioDAO implements Entity<Usuario>{
-	private ArrayList<Usuario> listaDeUsuarios;
+	private ArrayList<Usuario> listaDeUsuarios = new ArrayList<Usuario>();
 
 	public ArrayList<Usuario> getListaDeUsuarios() {
 		return listaDeUsuarios;
@@ -18,18 +18,18 @@ public class UsuarioDAO implements Entity<Usuario>{
 
 	@Override
 	public void create(Usuario objeto) {
-		if(objeto != null) {
+		if(objeto == null) {
 			System.err.println("Usuário Inválido!");
 	    	return;
 		} 
 		  
 	    if (listaDeUsuarios.contains(objeto)) {
-	    	System.err.println("Usuário já existe!");
+	    	System.out.println("Usuário já existe!");
 	    	return;
 	    }
 	  
 		this.listaDeUsuarios.add(objeto);
-		System.err.println("Usuário cadastrado com sucesso!");
+		System.out.println("Usuário cadastrado com sucesso!");
 		
 	}
 
@@ -90,7 +90,7 @@ public class UsuarioDAO implements Entity<Usuario>{
 	
 	public Usuario findyByEmailAndPassword(String email, String senha) {
 		 for (Usuario usuario : listaDeUsuarios) {
-		        if (usuario.getEmail() == email && usuario.getSenha() == senha) {
+		        if ((usuario.getEmail().equals(email)) && (usuario.getSenha().equals(senha))) {
 		            return usuario;
 		        }
 		    }

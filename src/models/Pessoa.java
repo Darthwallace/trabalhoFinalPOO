@@ -1,5 +1,4 @@
 package models;
-import java.time.LocalDate;
 
 public class Pessoa {
 	public Pessoa(String nome, String dataNascimento) {
