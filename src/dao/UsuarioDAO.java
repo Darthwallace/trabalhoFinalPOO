@@ -7,6 +7,8 @@ import models.Usuario;
 
 public class UsuarioDAO implements Entity<Usuario>{
 	private ArrayList<Usuario> listaDeUsuarios = new ArrayList<Usuario>();
+    private int ultimoIdUtilizado = 0;
+
 
 	public ArrayList<Usuario> getListaDeUsuarios() {
 		return listaDeUsuarios;
@@ -27,6 +29,8 @@ public class UsuarioDAO implements Entity<Usuario>{
 	    	System.out.println("Usuário já existe!");
 	    	return;
 	    }
+	    ultimoIdUtilizado++;
+	    objeto.setId(ultimoIdUtilizado); 
 	  
 		this.listaDeUsuarios.add(objeto);
 		System.out.println("Usuário cadastrado com sucesso!");

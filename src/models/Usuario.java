@@ -3,11 +3,9 @@ package models;
 import java.util.List;
 
 public class Usuario extends Pessoa {
-	public Usuario(String nome, String dataNascimento,
-					Integer id, String email,
+	public Usuario(String nome, String dataNascimento, String email,
 					String senha, Boolean isAdmin, List<Emprestimo> historicoEmprestimo) {
 		super(nome, dataNascimento);
-		Id = id;
 		this.email = email;
 		this.senha = senha;
 		this.isAdmin = isAdmin;
@@ -62,12 +60,4 @@ public class Usuario extends Pessoa {
 		return Id;
 	}
 
-//	@Override
-//	public boolean login(String email, String password, UsuarioDAO usuario) {
-//		Usuario user = usuario.findyByEmailAndPassword(email, password);
-//		if (user != null) return true;
-//		else return false;
-//		
-//	}
-	
 }

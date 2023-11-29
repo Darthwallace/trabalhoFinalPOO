@@ -3,9 +3,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import interfaces.Entity;
 import models.Genero;
+import models.Usuario;
 
 public class GeneroDAO implements Entity<Genero> {
-	private ArrayList<Genero> listaDeGenero;
+	private ArrayList<Genero> listaDeGenero = new ArrayList<Genero>();
 	
 	public ArrayList<Genero> getListaDeGenero() {
 		return listaDeGenero;
@@ -18,7 +19,7 @@ public class GeneroDAO implements Entity<Genero> {
 	 
 	@Override
 	public void create(Genero objeto) {
-		if(objeto != null) {
+		if(objeto == null) {
 			System.err.println("Objeto Inválido!");
 	    	return;
 		} 
@@ -29,7 +30,7 @@ public class GeneroDAO implements Entity<Genero> {
 	    }
 	  
 		this.listaDeGenero.add(objeto);
-		System.err.println("Gênero cadastrado com sucesso!");
+		System.out.println("Gênero cadastrado com sucesso!");
 		
 	}
 

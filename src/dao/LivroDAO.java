@@ -3,10 +3,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import interfaces.Entity;
 import models.Livro;
+import models.Usuario;
 
 
 public class LivroDAO implements Entity<Livro> {
-	private ArrayList<Livro> listaDeLivros;
+	private ArrayList<Livro> listaDeLivros = new ArrayList<Livro>();;
 
 	public ArrayList<Livro> getListaDeLivros() {
 		return listaDeLivros;
@@ -19,7 +20,7 @@ public class LivroDAO implements Entity<Livro> {
 
 	@Override
 	public void create(Livro objeto) {
-		if(objeto != null) {
+		if(objeto == null) {
 			System.err.println("Livro Inválido!");
 	    	return;
 		} 
@@ -30,7 +31,7 @@ public class LivroDAO implements Entity<Livro> {
 	    }
 	  
 		this.listaDeLivros.add(objeto);
-		System.err.println("Livro cadastrado com sucesso!");
+		System.out.println("Livro cadastrado com sucesso!");
 	}
 
 	@Override
@@ -91,5 +92,4 @@ public class LivroDAO implements Entity<Livro> {
 	public ArrayList<Livro> selectAll() {
 		 return listaDeLivros;
 	}
-
 }

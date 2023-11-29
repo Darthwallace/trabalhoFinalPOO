@@ -7,12 +7,11 @@ import dao.UsuarioDAO;
 public class Admin extends Usuario {
     public Admin(String nome,
     			 String dataNascimento, 
-    			 Integer id, 
     			 String email, 
     			 String senha,
     			 Boolean isAdmin,
     			 List<Emprestimo> historicoEmprestimo) {
-		   super(nome, dataNascimento, id, email, senha, isAdmin, historicoEmprestimo);
+		   super(nome, dataNascimento, email, senha, isAdmin, historicoEmprestimo);
 	}
 
 	public void criarUsuario(UsuarioDAO dao, Usuario usuario) {
