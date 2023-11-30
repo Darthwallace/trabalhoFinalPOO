@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.Iterator;
 import interfaces.Entity;
+import models.Biblioteca;
 import models.Usuario;
 
 public class UsuarioDAO implements Entity<Usuario>{
@@ -95,10 +96,13 @@ public class UsuarioDAO implements Entity<Usuario>{
 	public Usuario findyByEmailAndPassword(String email, String senha) {
 		 for (Usuario usuario : listaDeUsuarios) {
 		        if ((usuario.getEmail().equals(email)) && (usuario.getSenha().equals(senha))) {
+		        	if (usuario != null) {
+		        		usuario.setHistoricoEmprestimo(Biblioteca.emprestimoDao.getListaDeEmprestimosPorUsuarioID(usuario.getId()));
+		   		 	}
 		            return usuario;
 		        }
-		    }
-
+	    }
+		 
 	    return null; 
 	}
 

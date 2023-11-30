@@ -7,12 +7,22 @@ import models.Emprestimo;
 import models.Livro;
 
 public class EmprestimoDAO implements Entity<Emprestimo>{
-    private ArrayList<Emprestimo> listaDeEmprestimos = new ArrayList<Emprestimo>();;
+    private ArrayList<Emprestimo> listaDeEmprestimos = new ArrayList<Emprestimo>();
     private int ultimoIdUtilizado = 0;
     
     
     public ArrayList<Emprestimo> getListaDeEmprestimos() {
 		return listaDeEmprestimos;
+	}
+    
+    public ArrayList<Emprestimo> getListaDeEmprestimosPorUsuarioID(Integer id) {
+    	ArrayList<Emprestimo> listaDeEmprestimosPorId = new ArrayList<Emprestimo>();
+    	for (Emprestimo objeto : listaDeEmprestimos) {
+    		if (objeto.getUsuario().getId() == id) {
+    			listaDeEmprestimosPorId.add(objeto);
+    		}
+    	}
+		return listaDeEmprestimosPorId;
 	}
 
 	public void setListaDeEmprestimos(ArrayList<Emprestimo> listaDeEmprestimos) {
@@ -35,7 +45,7 @@ public class EmprestimoDAO implements Entity<Emprestimo>{
 	    objeto.setId(ultimoIdUtilizado); 
 	  
 		this.listaDeEmprestimos.add(objeto);
-		System.err.println("Empréstimo feito com sucesso!");
+		System.out.println("Empréstimo feito com sucesso!");
 	}
 
 	@Override

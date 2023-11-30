@@ -1,6 +1,14 @@
 package models;
 
+import outros.ConstantesSistemas;
+
 public class Livro  {
+
+	@Override
+	public String toString() {
+		return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", editora=" + editora
+				+ ", anoPublicacao=" + anoPublicacao + ", genero=" + genero + "]";
+	}
 
 	public Livro(String titulo, String autor, String isbn, String editora,
 			String anoPublicacao, Genero genero) {
@@ -10,6 +18,7 @@ public class Livro  {
 		this.editora = editora;
 		this.anoPublicacao = anoPublicacao;
 		this.genero = genero;
+		this.setStatus(ConstantesSistemas.CONCLUIDO);
 	}
 
 	
@@ -20,11 +29,20 @@ public class Livro  {
 	private String editora;
 	private String anoPublicacao;
 	private Genero genero;
+	private int status;
 	
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}

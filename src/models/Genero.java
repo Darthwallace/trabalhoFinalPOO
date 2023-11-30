@@ -5,8 +5,7 @@ public class Genero {
 	private String nome;
 	private String descricao;
 	
-	public Genero(Integer id, String nome, String descricao) {
-		this.id = id;
+	public Genero(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
 	}

@@ -2,6 +2,10 @@ package models;
 
 import java.util.List;
 
+import dao.EmprestimoDAO;
+import dao.LivroDAO;
+import outros.ConstantesSistemas;
+
 public class Usuario extends Pessoa {
 	public Usuario(String nome, String dataNascimento, String email,
 					String senha, Boolean isAdmin, List<Emprestimo> historicoEmprestimo) {
@@ -47,6 +51,19 @@ public class Usuario extends Pessoa {
 	public Boolean getIsAdmin(){
 		return isAdmin;
 	}
+	
+	public void criarEmprestimo(Emprestimo emprestimo) {
+	    Biblioteca.emprestimoDao.create(emprestimo);
+	    emprestimo.getLivro().setStatus(ConstantesSistemas.EM_ANDAMENTO);
+	    Biblioteca.livroDao.update(emprestimo.getLivro());
+    }
+	
+	public void devolverEmprestimo(Emprestimo emprestimo) {
+		emprestimo.setStatus(ConstantesSistemas.CONCLUIDO);
+	    Biblioteca.emprestimoDao.update(emprestimo);
+	    emprestimo.getLivro().setStatus(ConstantesSistemas.CONCLUIDO);
+	    Biblioteca.livroDao.update(emprestimo.getLivro());
+    }
 	
 	public void setHistoricoEmprestimo(List<Emprestimo> historicoEmprestimo){
 		this.historicoEmprestimo = historicoEmprestimo;

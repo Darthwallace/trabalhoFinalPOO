@@ -9,4 +9,14 @@ public class Utils {
 		String input = entrada.nextLine();
 		return input;
 	}
+	
+	public static String retornaStatus(Integer status) {
+		if (status == 1) {
+			return "CONCLUIDO";
+		} else if (status == 2) {
+			return "EM_ANDAMENTO";
+		} else {
+			return "ATRASADO";
+		}
+	}
 }

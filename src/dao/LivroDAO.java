@@ -4,6 +4,7 @@ import java.util.Iterator;
 import interfaces.Entity;
 import models.Livro;
 import models.Usuario;
+import outros.ConstantesSistemas;
 
 
 public class LivroDAO implements Entity<Livro> {
@@ -11,7 +12,14 @@ public class LivroDAO implements Entity<Livro> {
 	private int ultimoIdUtilizado = 0;
 
 	public ArrayList<Livro> getListaDeLivros() {
-		return listaDeLivros;
+		ArrayList<Livro> listaConcluida = new ArrayList<>();
+
+		for (Livro livro : listaDeLivros) {
+			if (livro.getStatus() == ConstantesSistemas.CONCLUIDO)
+				listaConcluida.add(livro);
+		}
+		
+		return listaConcluida;
 	}
 
 	public void setListaDeLivros(ArrayList<Livro> listaDeLivros) {
@@ -48,6 +56,7 @@ public class LivroDAO implements Entity<Livro> {
 	            encontrado = true;
 	            livro.setTitulo(objeto.getTitulo());
 	            livro.setAutor(objeto.getAutor());
+	            livro.setStatus(objeto.getStatus());
 	         
 	        
 	            System.out.println("livro com ID " + objeto.getId() + " atualizado com sucesso.");

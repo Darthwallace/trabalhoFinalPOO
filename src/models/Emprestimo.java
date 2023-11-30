@@ -1,5 +1,6 @@
 package models;
 
+import outros.Utils;
 
 public class Emprestimo{
 	private Integer id;
@@ -56,7 +57,7 @@ public class Emprestimo{
 	
 	@Override
 	public String toString() {
-		return "Emprestimo [id=" + id + ", status=" + status + ", dataEmprestimo=" + dataEmprestimo
+		return "Emprestimo [id=" + id + ", status=" + Utils.retornaStatus(status) + ", dataEmprestimo=" + dataEmprestimo
 				+ ", dataDevolucaoPrevista=" + dataDevolucaoPrevista + ", livro=" + livro.getTitulo() + ", usuario=" + usuario.getNome()
 				+ "]";
 	}
