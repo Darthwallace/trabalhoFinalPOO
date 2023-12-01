@@ -2,6 +2,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.Iterator;
 import interfaces.Entity;
+import models.Biblioteca;
 import models.Livro;
 import models.Usuario;
 import outros.ConstantesSistemas;
@@ -101,8 +102,19 @@ public class LivroDAO implements Entity<Livro> {
 	    return null; 
 	}
 
+	
 	@Override
 	public ArrayList<Livro> selectAll() {
 		 return listaDeLivros;
+	}
+	
+	public Livro findyByTitle(String title) {
+		 for (Livro livro : listaDeLivros) {
+		        if (livro.getTitulo().equals(title)) {
+		            return livro;
+		        }
+	    }
+		 
+	    return null; 
 	}
 }

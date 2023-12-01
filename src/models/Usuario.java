@@ -8,11 +8,11 @@ import outros.ConstantesSistemas;
 
 public class Usuario extends Pessoa {
 	public Usuario(String nome, String dataNascimento, String email,
-					String senha, Boolean isAdmin, List<Emprestimo> historicoEmprestimo) {
+					String senha, List<Emprestimo> historicoEmprestimo) {
 		super(nome, dataNascimento);
 		this.email = email;
 		this.senha = senha;
-		this.isAdmin = isAdmin;
+		this.isAdmin = false;
 		this.historicoEmprestimo = historicoEmprestimo;
 	}
 

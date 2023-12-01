@@ -1,4 +1,5 @@
 package models;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,19 +25,14 @@ public class Biblioteca extends Login {
 		livroDao = new LivroDAO();
 		emprestimoDao = new EmprestimoDAO();
 
-		
 		// Instanciando três objetos da classe Usuario e Admin
-        Usuario usuario1 = new Usuario("João", "1990-01-01", "joao@email.com", "senha123", false, new ArrayList<>());
-        Usuario usuario2 = new Usuario("Maria", "1985-05-15", "maria@email.com", "senha456", true,  new ArrayList<>());
-        Usuario usuario3 = new Usuario("Carlos", "1988-08-20", "carlos@email.com", "senha789", false, new ArrayList<>());
-        Admin admin1 = new Admin("Admin1", "1990-05-15", "gui@gmail.com", "123", true, new ArrayList<>());
-        Admin admin2 = new Admin("Admin2", "1985-10-22", "admin2@example.com", "senha456", true, new ArrayList<>());
+        Usuario usuario1 = new Usuario("João", "1990-01-01", "joao@email.com", "senha123", new ArrayList<>());
+        Usuario usuario2 = new Usuario("Maria", "1985-05-15", "maria@email.com", "senha456", new ArrayList<>());
+        Admin admin1 = new Admin("Admin1", "1990-05-15", "admin@gmail.com", "adm123", new ArrayList<>());
         
         usuarioDao.create(usuario1);
         usuarioDao.create(usuario2);
-        usuarioDao.create(usuario3);
         usuarioDao.create(admin1);
-        usuarioDao.create(admin2);
         
         // Instanciando alguns gêneros
         Genero genero1 = new Genero("Aventura", "Livros de aventura");
@@ -53,7 +49,6 @@ public class Biblioteca extends Login {
         Livro livro4 = new Livro("Orgulho e Preconceito", "Jane Austen", "978-0141439518", "Penguin Classics", "1813", genero2);
         Livro livro5 = new Livro("O Hobbit", "J.R.R. Tolkien", "978-8578277109", "WMF Martins Fontes", "1937", genero2);
 
-        
         livroDao.create(livro1);
         livroDao.create(livro2);
         livroDao.create(livro3);
@@ -73,7 +68,6 @@ public class Biblioteca extends Login {
         emprestimoDao.create(emprestimo1);
         emprestimoDao.create(emprestimo2);
         emprestimoDao.create(emprestimo3);
-   
 	}
 	
 	public List<Livro> listaLivros;
@@ -107,30 +101,63 @@ public class Biblioteca extends Login {
 	public void menuLogin() {
 		Scanner entrada = new Scanner(System.in);
 		
-		while(true) {
-			System.out.println("\n### B I B L I O T E C A ###\n");
+		while(true) {		
+			System.out.println("\n\n###########################");
+			System.out.println("### B I B L I O T E C A ###");
+			System.out.println("###########################\n");
 			System.out.println("Bem-vindo as sistema de gerênciamento de biblioteca.\n");
 			System.out.println("Faça login para acessar:\n");
 			
-			
-			
-			/*
-			 * Primeiramente deve ter a pessoa que ela vai ter acesso aos livros cadastrados e os generos cadastrados
-			 *  e também um menu que dá opcao dela logar
-			 */
-			
-			
-			/*
-			 * Se ela se logar deverá verificar se é um usuário comum ou admin
-			 */
-			
-			String email = Utils.printar("Digite o seu E-mail");
-			String senha = Utils.printar("Digite a sua Senha:");
+			String email = Utils.printar("- Digite o seu E-mail");
+			String senha = Utils.printar("- Digite a sua Senha:");
 			Usuario usuario = login(email, senha, usuarioDao);
 			
 			if (usuario == null) {
 				System.out.println("Nenhum usuário encontrado!");
 				continue;
+			}
+
+			if (usuario.getIsAdmin() == false) {
+				while(true) {
+					System.out.println("\n\n\n\n###########################");
+					System.out.println("### B I B L I O T E C A ###");
+					System.out.println("###########################\n");
+					System.out.println("Bem-vindo " + usuario.getNome() + ".\n");
+					System.out.println("O que você deseja fazer ?\n");
+					System.out.println("1 - Ver livros disponíveis ?");
+					System.out.println("2 - Fazer empréstimo ?");
+					System.out.println("3 - Deseja fazer devolução ?");
+					System.out.println("4 - Deseja se deslogar ?");
+					
+					String opcao = entrada.nextLine();
+					
+					System.out.println(opcao);
+					
+					switch(opcao) {
+						case "1":
+							System.out.println("\n\n\n\n###########################");
+							System.out.println("### B I B L I O T E C A ###");
+							System.out.println("###########################");
+							System.out.println("\n##### LISTA DE LIVROS #####\n");
+							ArrayList<Livro> listaLivros = livroDao.getListaDeLivros();
+							
+							for (int i = 0; i < listaLivros.size(); i++) {
+								Livro livro = listaLivros.get(i);
+								System.out.println("[" + (i + 1) + "]" + " - " + livro.getTitulo() + ", " + livro.getAutor());
+							}
+							
+							System.out.println("\n[VOLTAR]" + " - Voltar ao menu anterior\n");
+
+							String idLivro = Utils.printar("- Deseja ver mais detalhes? Selecione uma livro:");
+							
+							if (idLivro == "VOLTAR") {
+								break;
+							}
+										
+							break;
+						default:
+					}
+				}
 			}
 			
 			if (usuario instanceof Admin) {
@@ -147,9 +174,9 @@ public class Biblioteca extends Login {
 					System.out.println("6 - Deseja fazer devolução ?");
 					System.out.println("7 - Deseja se deslogar ?");
 					
-					
 					String opcao = entrada.nextLine();
 					boolean sair = false;
+					
 					switch(opcao) {
 					case "1":
 						String nome = Utils.printar("Digite o nome do usuário");
@@ -159,9 +186,11 @@ public class Biblioteca extends Login {
 						boolean isAdmin = Utils.printar("O usuário deve ser admin? SIM ou NAO").equals("SIM") ? true : false;
 						
 						if (isAdmin) {
-							admin.criarUsuario(new Admin(nome, dataNascimento, emailUser, senhaUser, isAdmin, new ArrayList<>()));
+							//admin.criarUsuario(new Admin(nome, dataNascimento, emailUser, senhaUser, new ArrayList<>()));
+							Biblioteca.usuarioDao.create(new Admin(nome, dataNascimento, emailUser, senhaUser, new ArrayList<>()));
 						} else {
-							admin.criarUsuario(new Usuario(nome, dataNascimento, emailUser, senhaUser, isAdmin, new ArrayList<>()));
+							//admin.criarUsuario(new Usuario(nome, dataNascimento, emailUser, senhaUser, new ArrayList<>()));
+							Biblioteca.usuarioDao.create(new Usuario(nome, dataNascimento, emailUser, senhaUser, new ArrayList<>()));
 						}
 						
 						System.out.println("Usuário criado com sucesso !!!!");

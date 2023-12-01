@@ -13,9 +13,11 @@ public class Admin extends Usuario {
     			 String dataNascimento, 
     			 String email, 
     			 String senha,
-    			 Boolean isAdmin,
+    			
     			 List<Emprestimo> historicoEmprestimo) {
-		   super(nome, dataNascimento, email, senha, isAdmin, historicoEmprestimo);
+		   super(nome, dataNascimento, email, senha, historicoEmprestimo);
+		   
+		   this.isAdmin = true;
 	}
     
     
