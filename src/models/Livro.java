@@ -21,7 +21,6 @@ public class Livro  {
 		this.setStatus(ConstantesSistemas.CONCLUIDO);
 	}
 
-	
 	private int id;
 	private String titulo;
 	private String autor;

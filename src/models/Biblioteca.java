@@ -19,13 +19,14 @@ public class Biblioteca extends Login {
 	public static LivroDAO livroDao;
 	public static EmprestimoDAO emprestimoDao;
 
-	public static void startup() {
+	// Construtor
+	public Biblioteca() {
 		usuarioDao = new UsuarioDAO();
 		generoDao = new GeneroDAO();
 		livroDao = new LivroDAO();
 		emprestimoDao = new EmprestimoDAO();
 
-		// Instanciando três objetos da classe Usuario e Admin
+		//Instanciando três objetos da classe Usuario e Admin
         Usuario usuario1 = new Usuario("João", "1990-01-01", "joao@email.com", "senha123", new ArrayList<>());
         Usuario usuario2 = new Usuario("Maria", "1985-05-15", "maria@email.com", "senha456", new ArrayList<>());
         Admin admin1 = new Admin("Admin1", "1990-05-15", "admin@gmail.com", "adm123", new ArrayList<>());
