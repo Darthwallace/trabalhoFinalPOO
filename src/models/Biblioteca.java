@@ -106,7 +106,7 @@ public class Biblioteca extends Login {
 			System.out.println("\n\n###########################");
 			System.out.println("### B I B L I O T E C A ###");
 			System.out.println("###########################\n");
-			System.out.println("Bem-vindo as sistema de gerênciamento de biblioteca.\n");
+			System.out.println("Bem-vindo ao sistema de gerênciamento de biblioteca.\n");
 			System.out.println("Faça login para acessar:\n");
 			
 			String email = Utils.printar("- Digite o seu E-mail");
@@ -119,44 +119,64 @@ public class Biblioteca extends Login {
 			}
 
 			if (usuario.getIsAdmin() == false) {
-				while(true) {
-					System.out.println("\n\n\n\n###########################");
-					System.out.println("### B I B L I O T E C A ###");
-					System.out.println("###########################\n");
-					System.out.println("Bem-vindo " + usuario.getNome() + ".\n");
+				boolean logado = true;
+
+				while(logado) {
+					System.out.println("\n\n\nBem-vindo " + usuario.getNome() + ", ");
 					System.out.println("O que você deseja fazer ?\n");
-					System.out.println("1 - Ver livros disponíveis ?");
-					System.out.println("2 - Fazer empréstimo ?");
-					System.out.println("3 - Deseja fazer devolução ?");
-					System.out.println("4 - Deseja se deslogar ?");
+					System.out.println("[1] - Ver livros disponíveis ?");
+					System.out.println("[2] - Fazer empréstimo ?");
+					System.out.println("[3] - Deseja fazer devolução ?");
+					System.out.println("[4] - Deseja se deslogar ?\n");
 					
 					String opcao = entrada.nextLine();
-					
-					System.out.println(opcao);
-					
+								
 					switch(opcao) {
 						case "1":
-							System.out.println("\n\n\n\n###########################");
-							System.out.println("### B I B L I O T E C A ###");
-							System.out.println("###########################");
-							System.out.println("\n##### LISTA DE LIVROS #####\n");
-							ArrayList<Livro> listaLivros = livroDao.getListaDeLivros();
+							boolean sair = false;
+
+							while(!sair) {
+								System.out.println("\n\n\n##### LISTA DE LIVROS DISPONIVEIS #####\n");
+								ArrayList<Livro> listaLivros = livroDao.getListaDeLivros();
+								
+								for (int i = 0; i < listaLivros.size(); i++) {
+									Livro livro = listaLivros.get(i);
+									System.out.println( (i + 1) + " - Título: " + livro.getTitulo() + ". Autor: " + livro.getAutor() + ". Publicacao: " + livro.getAnoPublicacao() + ". Genero: " + livro.getGenero().getNome() + ". ISBN: " + livro.getIsbn());
+								}
+								
+								String opcao1Menu2 = Utils.printar("\n[SAIR] - Voltar ao menu anterior");
+								
+								if (opcao1Menu2.equals("SAIR") || opcao1Menu2.equals("sair")) {
+									sair = true;
+									break;
+								}
+							}
+							break;
+						case "2":
+							System.out.println("\n\n\n##### EMPRESTIMO DE LIVRO #####\n");
+							System.out.println(usuario.getNome() + ", esses são os livros que estão disponíveis: \n");
 							
+							ArrayList<Livro> listaLivros = livroDao.getListaDeLivros();
+								
 							for (int i = 0; i < listaLivros.size(); i++) {
 								Livro livro = listaLivros.get(i);
-								System.out.println("[" + (i + 1) + "]" + " - " + livro.getTitulo() + ", " + livro.getAutor());
+								System.out.println("[" + (i + 1) + "] - " + livro.getTitulo() + ", " + livro.getAutor());
 							}
-							
-							System.out.println("\n[VOLTAR]" + " - Voltar ao menu anterior\n");
 
-							String idLivro = Utils.printar("- Deseja ver mais detalhes? Selecione uma livro:");
-							
-							if (idLivro == "VOLTAR") {
-								break;
-							}
-										
+							String opcao2Menu2 = Utils.printar("\nQual livro você deseja pegar emprestado?\n");
+
 							break;
+						
+						case "3":
+							break;
+
+						case "4":
+							logado = false;
+							System.out.println("\n Você será deslogado...\n");
+							break;
+							
 						default:
+							System.out.println("Opção Inválida!");
 					}
 				}
 			}
