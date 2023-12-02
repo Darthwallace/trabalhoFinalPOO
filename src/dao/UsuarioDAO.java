@@ -9,11 +9,9 @@ import models.Usuario;
 public class UsuarioDAO implements Entity<Usuario>{
 	private ArrayList<Usuario> listaDeUsuarios = new ArrayList<Usuario>();
     private int ultimoIdUtilizado = 0;
-
-
-	public ArrayList<Usuario> getListaDeUsuarios() {
-		return listaDeUsuarios;
-	}
+    
+    // Construtor
+    public UsuarioDAO() { }
 
 	public void setListaDeUsuarios(ArrayList<Usuario> listaDeUsuarios) {
 		this.listaDeUsuarios = listaDeUsuarios;
