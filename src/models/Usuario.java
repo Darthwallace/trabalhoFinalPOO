@@ -11,10 +11,10 @@ public class Usuario extends Pessoa {
 	// Atributos
 	private Integer id;
 	private String email;
-	public String senha;
-	public Boolean isAdmin;
-	public Boolean ativo;
-	public List<Emprestimo> emprestimos;
+	private String senha;
+	protected Boolean isAdmin;
+	private Boolean ativo;
+	private List<Emprestimo> emprestimos;
 
 	// Construtor
 	public Usuario(String nome, String dataNascimento, String email, String senha) {
