@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.EmprestimoDAO;
@@ -12,15 +13,15 @@ public class Usuario extends Pessoa {
 	private String email;
 	public String senha;
 	public Boolean isAdmin;
-	public List<Emprestimo> historicoEmprestimo;
+	public List<Emprestimo> emprestimos;
 
 	// Construtor
-	public Usuario(String nome, String dataNascimento, String email, String senha, List<Emprestimo> historicoEmprestimo) {
+	public Usuario(String nome, String dataNascimento, String email, String senha) {
 		super(nome, dataNascimento);
 		this.email = email;
 		this.senha = senha;
 		this.isAdmin = false;
-		this.historicoEmprestimo = historicoEmprestimo;
+		this.emprestimos = new ArrayList<>();
 	}
 
 	public Integer getId() {
@@ -55,15 +56,16 @@ public class Usuario extends Pessoa {
 		this.isAdmin = isAdmin;
 	}
 
-	public List<Emprestimo> getHistoricoEmprestimo(){
-		return historicoEmprestimo;
+	public List<Emprestimo> getEmprestimos(){
+		return this.emprestimos;
 	}
 	
-	public void setHistoricoEmprestimo(List<Emprestimo> historicoEmprestimo){
-		this.historicoEmprestimo = historicoEmprestimo;
+	public void setEmprestimos(List<Emprestimo> emprestimos){
+		this.emprestimos = emprestimos;
 	}
 	
 	public void addEmprestimo(Emprestimo emprestimo) {
+		this.emprestimos.add(emprestimo);
 	    Biblioteca.emprestimoDao.create(emprestimo);
 	    emprestimo.getLivro().setStatus(ConstantesSistemas.EM_ANDAMENTO);
 	    Biblioteca.livroDao.update(emprestimo.getLivro());
@@ -79,6 +81,6 @@ public class Usuario extends Pessoa {
 	@Override
 	public String toString() {
 		return "Usuario [Id=" + id + ", email=" + email + ", senha=" + senha + ", isAdmin=" + isAdmin
-				+ ", historicoEmprestimo=" + historicoEmprestimo + "]";
+				+ ", historicoEmprestimo=" + emprestimos + "]";
 	}
 }

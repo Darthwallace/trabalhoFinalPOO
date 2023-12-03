@@ -101,7 +101,7 @@ public class UsuarioDAO implements Entity<Usuario> {
 		for (Usuario usuario : listaDeUsuarios) {
 			   if ((usuario.getEmail().equals(email)) && (usuario.getSenha().equals(senha))) {
 				   if (usuario != null) {
-					   usuario.setHistoricoEmprestimo(Biblioteca.emprestimoDao.getListaDeEmprestimosPorUsuarioID(usuario.getId()));
+					   usuario.setEmprestimos(Biblioteca.emprestimoDao.getListaDeEmprestimosPorUsuarioID(usuario.getId()));
 					   }
 				   return usuario;
 			   }

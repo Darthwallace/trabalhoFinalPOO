@@ -9,8 +9,8 @@ import outros.ConstantesSistemas;
 
 public class Admin extends Usuario {
 	// Construtor
-    public Admin(String nome, String dataNascimento, String email, String senha, List<Emprestimo> historicoEmprestimo) {
-		super(nome, dataNascimento, email, senha, historicoEmprestimo);
+    public Admin(String nome, String dataNascimento, String email, String senha) {
+		super(nome, dataNascimento, email, senha);
 		   
 		this.isAdmin = true;
 	}

@@ -27,9 +27,9 @@ public class Biblioteca extends Login {
 		emprestimoDao = new EmprestimoDAO();
 
 		//Instanciando três objetos da classe Usuario e Admin
-        Usuario usuario1 = new Usuario("João", "1990-01-01", "joao@email.com", "senha123", new ArrayList<>());
-        Usuario usuario2 = new Usuario("Maria", "1985-05-15", "maria@email.com", "senha456", new ArrayList<>());
-        Admin admin1 = new Admin("Admin1", "1990-05-15", "admin@gmail.com", "adm123", new ArrayList<>());
+        Usuario usuario1 = new Usuario("João", "1990-01-01", "joao@email.com", "senha123");
+        Usuario usuario2 = new Usuario("Maria", "1985-05-15", "maria@email.com", "senha456");
+        Admin admin1 = new Admin("Admin1", "1990-05-15", "admin@gmail.com", "adm123");
         
         usuarioDao.create(usuario1);
         usuarioDao.create(usuario2);
@@ -264,10 +264,10 @@ public class Biblioteca extends Login {
 						
 						if (isAdmin) {
 							//admin.criarUsuario(new Admin(nome, dataNascimento, emailUser, senhaUser, new ArrayList<>()));
-							Biblioteca.usuarioDao.create(new Admin(nome, dataNascimento, emailUser, senhaUser, new ArrayList<>()));
+							Biblioteca.usuarioDao.create(new Admin(nome, dataNascimento, emailUser, senhaUser));
 						} else {
 							//admin.criarUsuario(new Usuario(nome, dataNascimento, emailUser, senhaUser, new ArrayList<>()));
-							Biblioteca.usuarioDao.create(new Usuario(nome, dataNascimento, emailUser, senhaUser, new ArrayList<>()));
+							Biblioteca.usuarioDao.create(new Usuario(nome, dataNascimento, emailUser, senhaUser));
 						}
 						
 						System.out.println("Usuário criado com sucesso !!!!");
@@ -301,7 +301,7 @@ public class Biblioteca extends Login {
 						break;
 					case "6":
 					    System.out.println("================ Aqui estão seus empréstimos ================");
-						for (Emprestimo emprestimo : admin.getHistoricoEmprestimo()) {
+						for (Emprestimo emprestimo : admin.getEmprestimos()) {
 							  System.out.println(emprestimo.toString());
 						 }
 						
@@ -332,7 +332,7 @@ public class Biblioteca extends Login {
         System.out.println("Email: " + usuario.getEmail());
         System.out.println("Senha: " + usuario.getSenha());
         System.out.println("isAdmin: " + usuario.getIsAdmin());
-        System.out.println("Histórico de Empréstimos: " + usuario.getHistoricoEmprestimo());
+        System.out.println("Histórico de Empréstimos: " + usuario.getEmprestimos());
         System.out.println("----------------------------------------");
     }
 }
