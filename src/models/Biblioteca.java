@@ -169,6 +169,10 @@ public class Biblioteca extends Login {
 								System.out.println(usuario.getNome() + ", esses são os livros que estão disponíveis: \n");
 								
 								ArrayList<Livro> listaLivros = livroDao.getListaDeLivros();
+
+								if (listaLivros.size() == 0) {
+									System.out.println( "\n- No momento, todos os livros estão emprestados!\n");
+								}
 									
 								for (int i = 0; i < listaLivros.size(); i++) {
 									Livro livro = listaLivros.get(i);
@@ -177,6 +181,8 @@ public class Biblioteca extends Login {
 
 									System.out.println("[" + id + "] - " + livro.getTitulo() + ", " + livro.getAutor());
 								}
+
+								System.out.println("\n[SAIR] - Voltar ao menu anterior");
 
 								String opcao2Menu2 = Utils.printar("\nQual livro você deseja pegar emprestado?\n");
 								int idLivroEscolhido;
@@ -214,7 +220,7 @@ public class Biblioteca extends Login {
 								}
 
 								String opcaoSairTelaEmprestimo = Utils.printar("[SAIR] - Voltar ao menu anterior");
-								
+							
 								if (opcaoSairTelaEmprestimo.equals("SAIR") || opcaoSairTelaEmprestimo.equals("sair")) {
 									sairTelaEmprestimo = true;
 									break;
@@ -224,6 +230,77 @@ public class Biblioteca extends Login {
 							break;
 						
 						case "3": // Fazer devolução
+							boolean sairTelaDevolucao = false;
+							while(!sairTelaDevolucao) {
+								System.out.println("\n\n\n##### DEVOLUCAO DE LIVRO #####\n");
+								System.out.println(usuario.getNome() + ", aqui estão seus empréstimos: \n");
+
+								List<Emprestimo> emprestimosPendentes = emprestimoDao.getEmprestimosPendentes(usuario);
+
+								if (emprestimosPendentes.size() == 0) {
+									System.out.println( "\n- No momento, não há livros pendentes para devolução!\n");
+								}
+
+								for (int i = 0; i < emprestimosPendentes.size(); i++) {
+									Emprestimo emprestimo = emprestimosPendentes.get(i);
+									Livro livro = emprestimo.getLivro();
+
+									int id = i + 1;
+
+									System.out.println("[" + id + "] - " + livro.getTitulo() + 
+										". Data do empréstimo: " + emprestimo.getDataEmprestimo() +
+										". Data de devolução: " + emprestimo.getDataDevolucaoPrevista() +
+										".");
+								}
+
+								System.out.println("\n[SAIR] - Voltar ao menu anterior");
+
+								String opcaoMenu3 = Utils.printar("\nQual livro você deseja devolver?\n");
+								int idLivroDevolvido;
+
+								// Valida se a opção informada é um numero inteiro
+								try {
+									idLivroDevolvido = Integer.parseInt(opcaoMenu3);
+								} catch (NumberFormatException  e) {
+									if (opcaoMenu3.equals("SAIR") || opcaoMenu3.equals("sair")) {
+										sairTelaDevolucao = true;
+										break;
+									}
+
+									System.out.println("- Opção inválida!");
+									continue;
+								}
+
+								// Valida se a opção informada é maior do que o numero de livros
+								if (idLivroDevolvido == 0 || idLivroDevolvido > emprestimosPendentes.size()) {
+									System.out.println("- Opção inválida!");
+									continue;
+								}
+
+								for (int j = 0; j < emprestimosPendentes.size(); j++) {
+									Emprestimo emprestimo = emprestimosPendentes.get(idLivroDevolvido - 1);
+									Livro livro = emprestimo.getLivro();
+
+									if (livro == null) {
+										System.out.println("- Emprestimo não encontrado!");
+										break;
+									}
+
+									usuario.devolverEmprestimo(emprestimo);
+
+									System.out.println("\n- Devolução do livro " + livro.getTitulo() + " concluído!\n");
+									break;
+								}
+
+								String opcaoSairTelaDevolucao = Utils.printar("[SAIR] - Voltar ao menu anterior");
+							
+								if (opcaoSairTelaDevolucao.equals("SAIR") || opcaoSairTelaDevolucao.equals("sair")) {
+									sairTelaEmprestimo = true;
+									break;
+								}
+
+								break;
+							}
 							break;
 
 						case "4": // Deseja se deslogar
@@ -291,7 +368,7 @@ public class Biblioteca extends Login {
 					case "5":
 						ArrayList<Livro> listaLivros = admin.listarLivros();
 						for (Livro livro : listaLivros) {
-							  System.out.println(livro.toString());
+							System.out.println(livro.toString());
 						 }
 						
 						String idLivro = Utils.printar("----------- Escolha agora o id do livro para realizar o empréstimo----------");

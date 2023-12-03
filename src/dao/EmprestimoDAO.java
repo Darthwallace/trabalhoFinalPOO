@@ -1,10 +1,13 @@
 package dao;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 
 import interfaces.Entity;
 import models.Emprestimo;
 import models.Livro;
+import models.Usuario;
 
 public class EmprestimoDAO implements Entity<Emprestimo> {
 	// Atributos
@@ -29,6 +32,20 @@ public class EmprestimoDAO implements Entity<Emprestimo> {
 
 	public void setListaDeEmprestimos(ArrayList<Emprestimo> listaDeEmprestimos) {
 		this.listaDeEmprestimos = listaDeEmprestimos;
+	}
+
+	public List<Emprestimo> getEmprestimosPendentes(Usuario usuario) {
+		List<Emprestimo> pendentes = new ArrayList<>();
+		
+		for (Emprestimo emprestimo : this.listaDeEmprestimos) {
+			if (emprestimo.getUsuario().getEmail().equals(usuario.getEmail())) {
+				if (emprestimo.getStatus() != 1) { // CONCLUIDO = 1
+					pendentes.add(emprestimo);
+				}
+			}
+		}
+		
+		return pendentes;
 	}
 
 	@Override
@@ -106,7 +123,6 @@ public class EmprestimoDAO implements Entity<Emprestimo> {
 
 		return null; 
 	}
-
 
 	@Override
 	public ArrayList<Emprestimo> selectAll() {
