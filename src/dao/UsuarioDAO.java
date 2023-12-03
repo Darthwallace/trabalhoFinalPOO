@@ -1,7 +1,9 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
+
 import interfaces.Entity;
 import models.Biblioteca;
 import models.Usuario;
@@ -19,22 +21,22 @@ public class UsuarioDAO implements Entity<Usuario> {
 	}
 
 	@Override
-	public void create(Usuario objeto) {
-		if(objeto == null) {
+	public void create(Usuario usuario) {
+		if (usuario == null) {
 			System.err.println("Usuário Inválido!");
 	    	return;
 		} 
 		  
-	    if (listaDeUsuarios.contains(objeto)) {
+	    if (listaDeUsuarios.contains(usuario)) {
 	    	System.out.println("Usuário já existe!");
 	    	return;
 	    }
+
 	    ultimoIdUtilizado++;
-	    objeto.setId(ultimoIdUtilizado); 
+	
+	    usuario.setId(ultimoIdUtilizado); 
 	  
-		this.listaDeUsuarios.add(objeto);
-		System.out.println("Usuário cadastrado com sucesso!");
-		
+		this.listaDeUsuarios.add(usuario);
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class UsuarioDAO implements Entity<Usuario> {
 	            encontrado = true;
 	            usuario.setEmail(usuario.getEmail());
 	            usuario.setSenha(usuario.getSenha());
-	            usuario.setIsAdmin(usuario.getIsAdmin());
+	            usuario.setIsAdmin(usuario.isAdmin());
 
 	        
 	            System.out.println("Usuario com ID " + objeto.getId() + " atualizado com sucesso.");
@@ -62,22 +64,22 @@ public class UsuarioDAO implements Entity<Usuario> {
 
 	@Override
 	public void delete(int id) {
-		 boolean removido = false;
-		    Iterator<Usuario> iterator = listaDeUsuarios.iterator();
+		boolean removido = false;
+		Iterator<Usuario> iterator = listaDeUsuarios.iterator();
 
-		    while (iterator.hasNext()) {
-		    	Usuario usuario = iterator.next();
-		        if (usuario.getId() == id) {
-		            iterator.remove();
-		            removido = true;
-		            System.out.println("Usuario com ID " + id + " removido com sucesso.");
-		            break;
-		        }
-		    }
+		while (iterator.hasNext()) {
+			Usuario usuario = iterator.next();
+			if (usuario.getId() == id) {
+				iterator.remove();
+				removido = true;
+				System.out.println("Usuario com ID " + id + " removido com sucesso.");
+				break;
+			}
+		}
 
-		    if (!removido) {
-		        System.out.println("Usuario com ID " + id + " não encontrado para remoção.");
-		    }
+		if (!removido) {
+			System.out.println("Usuario com ID " + id + " não encontrado para remoção.");
+		}
 		
 	}
 
@@ -108,5 +110,26 @@ public class UsuarioDAO implements Entity<Usuario> {
 	   }
 		
 	   return null; 
-   }
+   	}
+
+	public List<Usuario> getUsuariosAtivos() {
+		List<Usuario> ativos = new ArrayList<>();
+		
+		for (Usuario usuario : this.listaDeUsuarios) {
+			if (usuario.isAtivo()) {
+				ativos.add(usuario);
+			}
+		}
+		
+		return ativos;
+	}
+
+	public void desativarUsuario(Usuario usuario) {
+		for (Usuario objeto : listaDeUsuarios) {
+	        if (usuario.getId() == objeto.getId()) {
+	            usuario.setAtivo(false);
+	            break;
+	        }
+	    }
+	}
 }

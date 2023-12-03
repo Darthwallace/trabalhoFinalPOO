@@ -13,6 +13,7 @@ public class Usuario extends Pessoa {
 	private String email;
 	public String senha;
 	public Boolean isAdmin;
+	public Boolean ativo;
 	public List<Emprestimo> emprestimos;
 
 	// Construtor
@@ -21,6 +22,7 @@ public class Usuario extends Pessoa {
 		this.email = email;
 		this.senha = senha;
 		this.isAdmin = false;
+		this.ativo = true;
 		this.emprestimos = new ArrayList<>();
 	}
 
@@ -41,19 +43,27 @@ public class Usuario extends Pessoa {
 	}
 	
 	public String getSenha(){
-		return senha;
+		return this.senha;
 	}
 	
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
-	public Boolean getIsAdmin(){
-		return isAdmin;
+	public Boolean isAdmin(){
+		return this.isAdmin;
 	}
 	
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public Boolean isAtivo(){
+		return this.ativo;
+	}
+	
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public List<Emprestimo> getEmprestimos(){

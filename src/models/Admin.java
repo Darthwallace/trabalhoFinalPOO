@@ -48,6 +48,15 @@ public class Admin extends Usuario {
     	Biblioteca.usuarioDao.delete(id);
     }
 
+	public void desativarUsuario(Usuario usuario) {
+    	if (this.getEmail() == usuario.getEmail()) {
+    		System.err.println("\nNão é permitido excluir seu próprio usuário.");
+    		return;
+    	} 
+    	
+    	Biblioteca.usuarioDao.desativarUsuario(usuario);
+    }
+
     public void editarUsuario(UsuarioDAO dao, Usuario usuario) {
     	dao.update(usuario);
     }
