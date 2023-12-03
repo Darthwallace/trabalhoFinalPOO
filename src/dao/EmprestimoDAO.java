@@ -32,22 +32,24 @@ public class EmprestimoDAO implements Entity<Emprestimo> {
 	}
 
 	@Override
-	public void create(Emprestimo objeto) {
-		if (objeto == null) {
-			System.err.println("Objeto Inválido!");
+	public void create(Emprestimo emprestimo) {
+		if (emprestimo == null) {
+			System.err.println("Empréstimo inválido!");
 	    	return;
 		} 
 		  
-	    if (listaDeEmprestimos.contains(objeto)) {
+	    if (listaDeEmprestimos.contains(emprestimo)) {
 	    	System.err.println("Empréstimo já existe!");
 	    	return;
 	    }
 	    
 	    ultimoIdUtilizado++;
-	    objeto.setId(ultimoIdUtilizado); 
+	    emprestimo.setId(ultimoIdUtilizado); 
 	  
-		this.listaDeEmprestimos.add(objeto);
-		System.out.println("Empréstimo feito com sucesso!");
+		this.listaDeEmprestimos.add(emprestimo);
+
+		System.out.println("- Empréstimo do livro " + emprestimo.getLivro().getTitulo() + " concluído!");
+		System.out.println("- Lembre-se de devolver até o dia " + emprestimo.getDataDevolucaoPrevista() + ".\n");
 	}
 
 	@Override

@@ -63,7 +63,7 @@ public class Usuario extends Pessoa {
 		this.historicoEmprestimo = historicoEmprestimo;
 	}
 	
-	public void criarEmprestimo(Emprestimo emprestimo) {
+	public void addEmprestimo(Emprestimo emprestimo) {
 	    Biblioteca.emprestimoDao.create(emprestimo);
 	    emprestimo.getLivro().setStatus(ConstantesSistemas.EM_ANDAMENTO);
 	    Biblioteca.livroDao.update(emprestimo.getLivro());

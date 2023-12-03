@@ -59,7 +59,7 @@ public class LivroDAO implements Entity<Livro> {
 	            livro.setStatus(objeto.getStatus());
 	         
 	        
-	            System.out.println("livro com ID " + objeto.getId() + " atualizado com sucesso.");
+	            // System.out.println("livro com ID " + objeto.getId() + " atualizado com sucesso.");
 	            break;
 	        }
 	    }

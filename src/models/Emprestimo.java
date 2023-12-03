@@ -3,6 +3,7 @@ package models;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import outros.ConstantesSistemas;
 import outros.Utils;
 
 public class Emprestimo {
@@ -15,8 +16,8 @@ public class Emprestimo {
 	private Usuario usuario;
 	
 	// Construtor
-	public Emprestimo(Integer status, Livro livro, Usuario usuario) {
-		this.status = status;
+	public Emprestimo(Livro livro, Usuario usuario) {
+		this.status = ConstantesSistemas.EM_ANDAMENTO;
 		this.dataEmprestimo = this.calculaDataEmprestimo();
 		this.dataDevolucaoPrevista = this.calculaDataEntrega();
 		this.livro = livro;
@@ -65,7 +66,7 @@ public class Emprestimo {
 		return dataEmprestimo;
 	}
 	
-	public String getDataDevolucao() {
+	public String getDataDevolucaoPrevista() {
 		return dataDevolucaoPrevista;
 	}
 	

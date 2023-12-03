@@ -58,12 +58,12 @@ public class Biblioteca extends Login {
         
         //Instanciando Emprestimo
         livro1.setStatus(ConstantesSistemas.EM_ANDAMENTO);
-        Emprestimo emprestimo1 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, livro1, usuario1);
+        Emprestimo emprestimo1 = new Emprestimo(livro1, usuario1);
         
-        Emprestimo emprestimo2 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, livro2, usuario2);
+        Emprestimo emprestimo2 = new Emprestimo(livro2, usuario2);
         livro2.setStatus(ConstantesSistemas.EM_ANDAMENTO);
         
-        Emprestimo emprestimo3 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, livro3, admin1);
+        Emprestimo emprestimo3 = new Emprestimo(livro3, admin1);
         livro3.setStatus(ConstantesSistemas.EM_ANDAMENTO);
         
         emprestimoDao.create(emprestimo1);
@@ -129,18 +129,22 @@ public class Biblioteca extends Login {
 					System.out.println("O que você deseja fazer ?\n");
 					System.out.println("[1] - Ver livros disponíveis ?");
 					System.out.println("[2] - Fazer empréstimo ?");
-					System.out.println("[3] - Deseja fazer devolução ?");
+					System.out.println("[3] - Fazer devolução ?");
 					System.out.println("[4] - Deseja se deslogar ?\n");
 					
 					String opcao = entrada.nextLine();
 								
 					switch(opcao) {
-						case "1":
+						case "1": // Ver livros disponiveis
 							boolean sair = false;
 
 							while(!sair) {
 								System.out.println("\n\n\n##### LISTA DE LIVROS DISPONIVEIS #####\n");
 								ArrayList<Livro> listaLivros = livroDao.getListaDeLivros();
+
+								if (listaLivros.size() == 0) {
+									System.out.println( "\n- No momento, todos os livros estão emprestados!\n");
+								}
 								
 								for (int i = 0; i < listaLivros.size(); i++) {
 									Livro livro = listaLivros.get(i);
@@ -155,37 +159,48 @@ public class Biblioteca extends Login {
 								}
 							}
 							break;
-						case "2":
-							System.out.println("\n\n\n##### EMPRESTIMO DE LIVRO #####\n");
-							System.out.println(usuario.getNome() + ", esses são os livros que estão disponíveis: \n");
-							
-							ArrayList<Livro> listaLivros = livroDao.getListaDeLivros();
+						case "2": // Fazer emprestimo
+							boolean sairTelaEmprestimo = false;
+
+							while(!sairTelaEmprestimo) {
+								System.out.println("\n\n\n##### EMPRESTIMO DE LIVRO #####\n");
+								System.out.println(usuario.getNome() + ", esses são os livros que estão disponíveis: \n");
 								
-							for (int i = 0; i < listaLivros.size(); i++) {
-								Livro livro = listaLivros.get(i);
-								System.out.println("[" + (i + 1) + "] - " + livro.getTitulo() + ", " + livro.getAutor());
-							}
+								ArrayList<Livro> listaLivros = livroDao.getListaDeLivros();
+									
+								for (int i = 0; i < listaLivros.size(); i++) {
+									Livro livro = listaLivros.get(i);
+									System.out.println("[" + (i + 1) + "] - " + livro.getTitulo() + ", " + livro.getAutor());
+								}
 
-							String opcao2Menu2 = Utils.printar("\nQual livro você deseja pegar emprestado?\n");
+								String opcao2Menu2 = Utils.printar("\nQual livro você deseja pegar emprestado?\n");
 
-							for (int j = 0; j < listaLivros.size(); j++) {
-								Livro livro = listaLivros.get(Integer.parseInt(opcao2Menu2) - 1);
+								for (int j = 0; j < listaLivros.size(); j++) {
+									Livro livro = listaLivros.get(Integer.parseInt(opcao2Menu2) - 1);
 
-								if (livro == null) {
-									System.out.println("- Livro não encontrado!");
+									if (livro == null) {
+										System.out.println("- Livro não encontrado!");
+										break;
+									}
+
+									Emprestimo emprestimo = new Emprestimo(livro, usuario);
+									usuario.addEmprestimo(emprestimo);
 									break;
 								}
 
-								System.out.println("- " + livro.getTitulo() + ", " + livro.getAutor());
-								break;
+								String opcaoSair = Utils.printar("\n[SAIR] - Voltar ao menu anterior");
+								
+								if (opcaoSair.equals("SAIR") || opcaoSair.equals("sair")) {
+									sairTelaEmprestimo = true;
+									break;
+								}
 							}
-
 							break;
 						
-						case "3":
+						case "3": // Fazer devolução
 							break;
 
-						case "4":
+						case "4": // Deseja se deslogar
 							logado = false;
 							System.out.println("\n Você será deslogado...\n");
 							break;
@@ -256,7 +271,7 @@ public class Biblioteca extends Login {
 						String idLivro = Utils.printar("----------- Escolha agora o id do livro para realizar o empréstimo----------");
 						
 						Livro livroEscolhido = admin.listarPorId(Integer.parseInt(idLivro));
-						admin.criarEmprestimo(new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, livroEscolhido, admin));
+						admin.addEmprestimo(new Emprestimo(livroEscolhido, admin));
 						break;
 					case "6":
 					    System.out.println("================ Aqui estão seus empréstimos ================");
