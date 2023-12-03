@@ -1,6 +1,4 @@
 package outros;
-//import biblioteca.Livro;
-//import biblioteca.Biblioteca;
 
 public class Relatorio {
 	// Atributos
@@ -22,5 +20,4 @@ public class Relatorio {
 	public int getTotalDeEmprestimos() {
 		return totalDeEmprestimos;
 	}
-	
 }
