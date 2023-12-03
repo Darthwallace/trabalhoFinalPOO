@@ -3,7 +3,7 @@ package outros;
 //import biblioteca.Biblioteca;
 
 public class Relatorio {
-
+	// Atributos
 	public static int totalLivros;
 	public int totalDeEmprestimos;
 	

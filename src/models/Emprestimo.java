@@ -1,8 +1,12 @@
 package models;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import outros.Utils;
 
-public class Emprestimo{
+public class Emprestimo {
+	// Atributos
 	private Integer id;
 	private Integer status;
 	private String dataEmprestimo;
@@ -10,49 +14,75 @@ public class Emprestimo{
 	private Livro livro;
 	private Usuario usuario;
 	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public Emprestimo(Integer status, String dataEmprestimo, String dataDevolucaoPrevista, Livro livro,
-			Usuario usuario) {
+	// Construtor
+	public Emprestimo(Integer status, Livro livro, Usuario usuario) {
 		this.status = status;
-		this.dataEmprestimo = dataEmprestimo;
-		this.dataDevolucaoPrevista = dataDevolucaoPrevista;
+		this.dataEmprestimo = this.calculaDataEmprestimo();
+		this.dataDevolucaoPrevista = this.calculaDataEntrega();
 		this.livro = livro;
 		this.usuario = usuario;
+	}
+
+	public String calculaDataEmprestimo() {
+		LocalDate dataAtual = LocalDate.now();
+		// Criando um formato desejado
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        // Formatando a data conforme o formato desejado
+        String dataFormatada = dataAtual.format(formatter);
+
+		return dataFormatada;
+	}
+
+	public String calculaDataEntrega() {
+		LocalDate dataAtual = LocalDate.now();
+		// Adicionando 30 dias a data atual
+        LocalDate dataDaquiA30Dias = dataAtual.plusDays(30);
+		// Criando um formato desejado
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        // Formatando a data conforme o formato desejado
+        String dataFormatada = dataDaquiA30Dias.format(formatter);
+
+		return dataFormatada;
 	}
 
 	public Integer getId(){
 		return id;
 	}
 	
-	public void setStatus(Integer status) {
-		this.status = status;
+	public void setId(Integer id){
+		this.id = id;
 	}
 	
 	public Integer getStatus(){
 		return status;
 	}
-	
-	public void setDataEmprestimo(String dataEmprestimo) {
-		this.dataEmprestimo = dataEmprestimo;
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 	public String getDataEmprestimo() {
 		return dataEmprestimo;
 	}
 	
-	public void setDataDevolucaoPrevista(String dataDevolucaoPrevista) {
-		this.dataDevolucaoPrevista = dataDevolucaoPrevista;
-	}
-	
 	public String getDataDevolucao() {
 		return dataDevolucaoPrevista;
 	}
 	
+	public Livro getLivro() {
+		return livro;
+	}
+	
 	public void setLivro(Livro livro) {
 		this.livro = livro;
+	}
+	
+	public Usuario getUsuario(){
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	@Override
@@ -61,17 +91,4 @@ public class Emprestimo{
 				+ ", dataDevolucaoPrevista=" + dataDevolucaoPrevista + ", livro=" + livro.getTitulo() + ", usuario=" + usuario.getNome()
 				+ "]";
 	}
-
-	public Livro getLivro() {
-		return livro;
-	}
-	
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	public Usuario getUsuario(){
-		return usuario;
-	}
-
 }

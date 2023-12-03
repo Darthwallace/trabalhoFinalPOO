@@ -8,6 +8,7 @@ public class Utils {
 		System.out.println(valor);
 		Scanner entrada = new Scanner(System.in);
 		String input = entrada.nextLine();
+		
 		return input;
 	}
 	

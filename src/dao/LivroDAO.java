@@ -7,8 +7,8 @@ import models.Livro;
 import models.Usuario;
 import outros.ConstantesSistemas;
 
-
 public class LivroDAO implements Entity<Livro> {
+	// Atributos
 	private ArrayList<Livro> listaDeLivros = new ArrayList<Livro>();
 	private int ultimoIdUtilizado = 0;
 
@@ -27,7 +27,6 @@ public class LivroDAO implements Entity<Livro> {
 		this.listaDeLivros = listaDeLivros;
 	}
 	
-
 	@Override
 	public void create(Livro objeto) {
 		if(objeto == null) {
@@ -102,17 +101,16 @@ public class LivroDAO implements Entity<Livro> {
 	    return null; 
 	}
 
-	
 	@Override
 	public ArrayList<Livro> selectAll() {
-		 return listaDeLivros;
+		return listaDeLivros;
 	}
 	
 	public Livro findyByTitle(String title) {
 		 for (Livro livro : listaDeLivros) {
-		        if (livro.getTitulo().equals(title)) {
-		            return livro;
-		        }
+			if (livro.getTitulo().equals(title)) {
+				return livro;
+			}
 	    }
 		 
 	    return null; 

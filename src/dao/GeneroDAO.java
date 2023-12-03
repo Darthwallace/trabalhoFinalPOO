@@ -6,9 +6,9 @@ import models.Genero;
 import models.Usuario;
 
 public class GeneroDAO implements Entity<Genero> {
+	// Atributos
 	private ArrayList<Genero> listaDeGenero = new ArrayList<Genero>();
 	private int ultimoIdUtilizado = 0;
-	 
 	
 	public ArrayList<Genero> getListaDeGenero() {
 		return listaDeGenero;
@@ -18,10 +18,9 @@ public class GeneroDAO implements Entity<Genero> {
 		this.listaDeGenero = listaDeGenero;
 	}
 	
-	 
 	@Override
 	public void create(Genero objeto) {
-		if(objeto == null) {
+		if (objeto == null) {
 			System.err.println("Objeto Inválido!");
 	    	return;
 		} 
@@ -36,7 +35,6 @@ public class GeneroDAO implements Entity<Genero> {
 	  
 		this.listaDeGenero.add(objeto);
 		System.out.println("Gênero cadastrado com sucesso!");
-		
 	}
 
 	@Override
@@ -62,22 +60,23 @@ public class GeneroDAO implements Entity<Genero> {
 
 	@Override
 	public void delete(int id) {
-		 boolean removido = false;
-		    Iterator<Genero> iterator = listaDeGenero.iterator();
+		boolean removido = false;
+		Iterator<Genero> iterator = listaDeGenero.iterator();
 
-		    while (iterator.hasNext()) {
-		    	Genero genero = iterator.next();
-		        if (genero.getId() == id) {
-		            iterator.remove();
-		            removido = true;
-		            System.out.println("Genero com ID " + id + " removido com sucesso.");
-		            break;
-		        }
-		    }
+		while (iterator.hasNext()) {
+			Genero genero = iterator.next();
 
-		    if (!removido) {
-		        System.out.println("Genero com ID " + id + " não encontrado para remoção.");
-		    }
+			if (genero.getId() == id) {
+				iterator.remove();
+				removido = true;
+				System.out.println("Genero com ID " + id + " removido com sucesso.");
+				break;
+			}
+		}
+
+		if (!removido) {
+			System.out.println("Genero com ID " + id + " não encontrado para remoção.");
+		}
 		
 	}
 
@@ -95,6 +94,6 @@ public class GeneroDAO implements Entity<Genero> {
 
 	@Override
 	public ArrayList<Genero> selectAll() {
-		 return listaDeGenero;
+		return listaDeGenero;
 	}
 }

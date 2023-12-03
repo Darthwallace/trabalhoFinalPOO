@@ -56,14 +56,14 @@ public class Biblioteca extends Login {
         livroDao.create(livro4);
         livroDao.create(livro5);
         
-        //Inatanciando Emprestimo
+        //Instanciando Emprestimo
         livro1.setStatus(ConstantesSistemas.EM_ANDAMENTO);
-        Emprestimo emprestimo1 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, "2023-11-29", "2023-12-30", livro1, usuario1);
+        Emprestimo emprestimo1 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, livro1, usuario1);
         
-        Emprestimo emprestimo2 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, "2023-11-29", "2023-12-30", livro2, usuario2);
+        Emprestimo emprestimo2 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, livro2, usuario2);
         livro2.setStatus(ConstantesSistemas.EM_ANDAMENTO);
         
-        Emprestimo emprestimo3 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, "2023-11-29", "2023-12-30", livro3, admin1);
+        Emprestimo emprestimo3 = new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, livro3, admin1);
         livro3.setStatus(ConstantesSistemas.EM_ANDAMENTO);
         
         emprestimoDao.create(emprestimo1);
@@ -122,7 +122,10 @@ public class Biblioteca extends Login {
 				boolean logado = true;
 
 				while(logado) {
-					System.out.println("\n\n\nBem-vindo " + usuario.getNome() + ", ");
+					System.out.println("\n\n###########################");
+					System.out.println("### B I B L I O T E C A ###");
+					System.out.println("###########################\n");
+					System.out.println("Bem-vindo " + usuario.getNome() + ", ");
 					System.out.println("O que você deseja fazer ?\n");
 					System.out.println("[1] - Ver livros disponíveis ?");
 					System.out.println("[2] - Fazer empréstimo ?");
@@ -164,6 +167,8 @@ public class Biblioteca extends Login {
 							}
 
 							String opcao2Menu2 = Utils.printar("\nQual livro você deseja pegar emprestado?\n");
+
+
 
 							break;
 						
@@ -241,7 +246,7 @@ public class Biblioteca extends Login {
 						String idLivro = Utils.printar("----------- Escolha agora o id do livro para realizar o empréstimo----------");
 						
 						Livro livroEscolhido = admin.listarPorId(Integer.parseInt(idLivro));
-						admin.criarEmprestimo(new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, "29/11/2023", "29/12/2023", livroEscolhido ,admin));
+						admin.criarEmprestimo(new Emprestimo(ConstantesSistemas.EM_ANDAMENTO, livroEscolhido, admin));
 						break;
 					case "6":
 					    System.out.println("================ Aqui estão seus empréstimos ================");

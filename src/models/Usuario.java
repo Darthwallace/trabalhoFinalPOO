@@ -7,8 +7,15 @@ import dao.LivroDAO;
 import outros.ConstantesSistemas;
 
 public class Usuario extends Pessoa {
-	public Usuario(String nome, String dataNascimento, String email,
-					String senha, List<Emprestimo> historicoEmprestimo) {
+	// Atributos
+	private Integer id;
+	private String email;
+	public String senha;
+	public Boolean isAdmin;
+	public List<Emprestimo> historicoEmprestimo;
+
+	// Construtor
+	public Usuario(String nome, String dataNascimento, String email, String senha, List<Emprestimo> historicoEmprestimo) {
 		super(nome, dataNascimento);
 		this.email = email;
 		this.senha = senha;
@@ -16,40 +23,44 @@ public class Usuario extends Pessoa {
 		this.historicoEmprestimo = historicoEmprestimo;
 	}
 
-	private Integer Id;
-	private String email;
-	public String senha;
-	public Boolean isAdmin;
-	public List<Emprestimo> historicoEmprestimo;
-	
-	
+	public Integer getId() {
+		return id;
+	}
 	
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
+	}
+
+	public String getEmail(){
+		return email;
 	}
 	
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	
-	public String getEmail(){
-		return email;
+	public String getSenha(){
+		return senha;
 	}
 	
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	public String getSenha(){
-		return senha;
+
+	public Boolean getIsAdmin(){
+		return isAdmin;
 	}
 	
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+
+	public List<Emprestimo> getHistoricoEmprestimo(){
+		return historicoEmprestimo;
+	}
 	
-	public Boolean getIsAdmin(){
-		return isAdmin;
+	public void setHistoricoEmprestimo(List<Emprestimo> historicoEmprestimo){
+		this.historicoEmprestimo = historicoEmprestimo;
 	}
 	
 	public void criarEmprestimo(Emprestimo emprestimo) {
@@ -64,22 +75,10 @@ public class Usuario extends Pessoa {
 	    emprestimo.getLivro().setStatus(ConstantesSistemas.CONCLUIDO);
 	    Biblioteca.livroDao.update(emprestimo.getLivro());
     }
-	
-	public void setHistoricoEmprestimo(List<Emprestimo> historicoEmprestimo){
-		this.historicoEmprestimo = historicoEmprestimo;
-	}
-	
-	public List<Emprestimo> getHistoricoEmprestimo(){
-		return historicoEmprestimo;
-	}
-
-	public Integer getId() {
-		return Id;
-	}
 
 	@Override
 	public String toString() {
-		return "Usuario [Id=" + Id + ", email=" + email + ", senha=" + senha + ", isAdmin=" + isAdmin
+		return "Usuario [Id=" + id + ", email=" + email + ", senha=" + senha + ", isAdmin=" + isAdmin
 				+ ", historicoEmprestimo=" + historicoEmprestimo + "]";
 	}
 }

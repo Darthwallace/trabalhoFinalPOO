@@ -6,10 +6,10 @@ import interfaces.Entity;
 import models.Emprestimo;
 import models.Livro;
 
-public class EmprestimoDAO implements Entity<Emprestimo>{
+public class EmprestimoDAO implements Entity<Emprestimo> {
+	// Atributos
     private ArrayList<Emprestimo> listaDeEmprestimos = new ArrayList<Emprestimo>();
     private int ultimoIdUtilizado = 0;
-    
     
     public ArrayList<Emprestimo> getListaDeEmprestimos() {
 		return listaDeEmprestimos;
@@ -17,11 +17,13 @@ public class EmprestimoDAO implements Entity<Emprestimo>{
     
     public ArrayList<Emprestimo> getListaDeEmprestimosPorUsuarioID(Integer id) {
     	ArrayList<Emprestimo> listaDeEmprestimosPorId = new ArrayList<Emprestimo>();
+
     	for (Emprestimo objeto : listaDeEmprestimos) {
     		if (objeto.getUsuario().getId() == id) {
     			listaDeEmprestimosPorId.add(objeto);
     		}
     	}
+
 		return listaDeEmprestimosPorId;
 	}
 
@@ -31,7 +33,7 @@ public class EmprestimoDAO implements Entity<Emprestimo>{
 
 	@Override
 	public void create(Emprestimo objeto) {
-		if(objeto == null) {
+		if (objeto == null) {
 			System.err.println("Objeto Inválido!");
 	    	return;
 		} 
@@ -56,9 +58,9 @@ public class EmprestimoDAO implements Entity<Emprestimo>{
 	        if (emprestimo.getId() == novoEmprestimo.getId()) {
 	            encontrado = true;
 	            emprestimo.setLivro(novoEmprestimo.getLivro());
-	            emprestimo.setDataEmprestimo(novoEmprestimo.getDataEmprestimo());
+//	            emprestimo.setDataEmprestimo(novoEmprestimo.getDataEmprestimo());
 	            emprestimo.setStatus(novoEmprestimo.getStatus());
-	            emprestimo.setDataDevolucaoPrevista(novoEmprestimo.getDataDevolucao());
+//	            emprestimo.setDataDevolucaoPrevista(novoEmprestimo.getDataDevolucao());
 
 	            System.out.println("Empréstimo com ID " + novoEmprestimo.getId() + " atualizado com sucesso.");
 	            break;
@@ -73,34 +75,34 @@ public class EmprestimoDAO implements Entity<Emprestimo>{
 
 	@Override
 	public void delete(int id) {
-		 boolean removido = false;
-		    Iterator<Emprestimo> iterator = listaDeEmprestimos.iterator();
+		boolean removido = false;
+		Iterator<Emprestimo> iterator = listaDeEmprestimos.iterator();
 
-		    while (iterator.hasNext()) {
-		        Emprestimo emprestimo = iterator.next();
-		        if (emprestimo.getId() == id) {
-		            iterator.remove();
-		            removido = true;
-		            System.out.println("Empréstimo com ID " + id + " removido com sucesso.");
-		            break;
-		        }
-		    }
+		while (iterator.hasNext()) {
+			Emprestimo emprestimo = iterator.next();
+			if (emprestimo.getId() == id) {
+				iterator.remove();
+				removido = true;
+				System.out.println("Empréstimo com ID " + id + " removido com sucesso.");
+				break;
+			}
+		}
 
-		    if (!removido) {
-		        System.out.println("Empréstimo com ID " + id + " não encontrado para remoção.");
-		    }
+		if (!removido) {
+			System.out.println("Empréstimo com ID " + id + " não encontrado para remoção.");
+		}
 		
 	}
 
 	@Override
 	public Emprestimo select(int id) {
-		 for (Emprestimo emprestimo : listaDeEmprestimos) {
-		        if (emprestimo.getId() == id) {
-		            return emprestimo;
-		        }
-		    }
+		for (Emprestimo emprestimo : listaDeEmprestimos) {
+			if (emprestimo.getId() == id) {
+				return emprestimo;
+			}
+		}
 
-		    return null; 
+		return null; 
 	}
 
 

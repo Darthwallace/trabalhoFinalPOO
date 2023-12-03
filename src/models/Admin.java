@@ -7,19 +7,13 @@ import dao.LivroDAO;
 import dao.UsuarioDAO;
 import outros.ConstantesSistemas;
 
-
 public class Admin extends Usuario {
-    public Admin(String nome,
-    			 String dataNascimento, 
-    			 String email, 
-    			 String senha,
-    			
-    			 List<Emprestimo> historicoEmprestimo) {
-		   super(nome, dataNascimento, email, senha, historicoEmprestimo);
+	// Construtor
+    public Admin(String nome, String dataNascimento, String email, String senha, List<Emprestimo> historicoEmprestimo) {
+		super(nome, dataNascimento, email, senha, historicoEmprestimo);
 		   
-		   this.isAdmin = true;
+		this.isAdmin = true;
 	}
-    
     
 	public void criarUsuario (Usuario usuario) {
 		Biblioteca.usuarioDao.create(usuario);
@@ -29,7 +23,6 @@ public class Admin extends Usuario {
 		return Biblioteca.usuarioDao.selectAll();
     }
 	
-
 	public ArrayList<Emprestimo> listarEmprestimos() {
 		ArrayList<Emprestimo> emprestimosQueNaoSaoConcluidos = new ArrayList<Emprestimo>();
 		
@@ -46,7 +39,6 @@ public class Admin extends Usuario {
 		return Biblioteca.emprestimoDao.select(id);
     }
 
-	
     public void deletarUsuario(int id) {
     	if (this.getId() == id) {
     		System.err.println("Não é permitido excluir seu próprio usuário");
@@ -63,7 +55,6 @@ public class Admin extends Usuario {
     public void criarLivro(LivroDAO dao, Livro livro) {
     	dao.create(livro);
     }
-    
     
     public ArrayList<Livro> listarLivros() {
     	return Biblioteca.livroDao.getListaDeLivros();
