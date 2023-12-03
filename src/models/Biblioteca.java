@@ -168,7 +168,17 @@ public class Biblioteca extends Login {
 
 							String opcao2Menu2 = Utils.printar("\nQual livro você deseja pegar emprestado?\n");
 
+							for (int j = 0; j < listaLivros.size(); j++) {
+								Livro livro = listaLivros.get(Integer.parseInt(opcao2Menu2) - 1);
 
+								if (livro == null) {
+									System.out.println("- Livro não encontrado!");
+									break;
+								}
+
+								System.out.println("- " + livro.getTitulo() + ", " + livro.getAutor());
+								break;
+							}
 
 							break;
 						
