@@ -151,12 +151,14 @@ public class Biblioteca extends Login {
 									System.out.println( (i + 1) + " - Título: " + livro.getTitulo() + ". Autor: " + livro.getAutor() + ". Publicacao: " + livro.getAnoPublicacao() + ". Genero: " + livro.getGenero().getNome() + ". ISBN: " + livro.getIsbn());
 								}
 								
-								String opcao1Menu2 = Utils.printar("\n[SAIR] - Voltar ao menu anterior");
+								String opcaoMenu2 = Utils.printar("\n[SAIR] - Voltar ao menu anterior");
 								
-								if (opcao1Menu2.equals("SAIR") || opcao1Menu2.equals("sair")) {
+								if (opcaoMenu2.equals("SAIR") || opcaoMenu2.equals("sair")) {
 									sair = true;
 									break;
 								}
+
+								System.out.println("- Opção inválida!");
 							}
 							break;
 						case "2": // Fazer emprestimo
@@ -170,13 +172,36 @@ public class Biblioteca extends Login {
 									
 								for (int i = 0; i < listaLivros.size(); i++) {
 									Livro livro = listaLivros.get(i);
-									System.out.println("[" + (i + 1) + "] - " + livro.getTitulo() + ", " + livro.getAutor());
+
+									int id = i + 1;
+
+									System.out.println("[" + id + "] - " + livro.getTitulo() + ", " + livro.getAutor());
 								}
 
 								String opcao2Menu2 = Utils.printar("\nQual livro você deseja pegar emprestado?\n");
+								int idLivroEscolhido;
+								
+								// Valida se a opção informada é um numero inteiro
+								try {
+									idLivroEscolhido = Integer.parseInt(opcao2Menu2);
+								} catch (NumberFormatException  e) {
+									if (opcao2Menu2.equals("SAIR") || opcao2Menu2.equals("sair")) {
+										sairTelaEmprestimo = true;
+										break;
+									}
+
+									System.out.println("- Opção inválida!");
+									continue;
+								}
+
+								// Valida se a opção informada é maior do que o numero de livros
+								if (idLivroEscolhido > listaLivros.size()) {
+									System.out.println("- Opção inválida!");
+									continue;
+								}
 
 								for (int j = 0; j < listaLivros.size(); j++) {
-									Livro livro = listaLivros.get(Integer.parseInt(opcao2Menu2) - 1);
+									Livro livro = listaLivros.get(idLivroEscolhido - 1);
 
 									if (livro == null) {
 										System.out.println("- Livro não encontrado!");
@@ -188,12 +213,13 @@ public class Biblioteca extends Login {
 									break;
 								}
 
-								String opcaoSair = Utils.printar("\n[SAIR] - Voltar ao menu anterior");
+								String opcaoSairTelaEmprestimo = Utils.printar("[SAIR] - Voltar ao menu anterior");
 								
-								if (opcaoSair.equals("SAIR") || opcaoSair.equals("sair")) {
+								if (opcaoSairTelaEmprestimo.equals("SAIR") || opcaoSairTelaEmprestimo.equals("sair")) {
 									sairTelaEmprestimo = true;
 									break;
 								}
+								
 							}
 							break;
 						

@@ -48,7 +48,7 @@ public class EmprestimoDAO implements Entity<Emprestimo> {
 	  
 		this.listaDeEmprestimos.add(emprestimo);
 
-		System.out.println("- Empréstimo do livro " + emprestimo.getLivro().getTitulo() + " concluído!");
+		System.out.println("\n- Empréstimo do livro " + emprestimo.getLivro().getTitulo() + " concluído!");
 		System.out.println("- Lembre-se de devolver até o dia " + emprestimo.getDataDevolucaoPrevista() + ".\n");
 	}
 
