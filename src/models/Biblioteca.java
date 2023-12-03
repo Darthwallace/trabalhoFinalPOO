@@ -582,28 +582,6 @@ public class Biblioteca extends Login {
 								System.out.println(emprestimo.toString());
 							}
 							break;
-						// case "5":
-						// 	ArrayList<Livro> listaLivros = admin.listarLivros();
-						// 	for (Livro livro : listaLivros) {
-						// 		System.out.println(livro.toString());
-						// 	}
-							
-						// 	String idLivro = Utils.printar("----------- Escolha agora o id do livro para realizar o empréstimo----------");
-							
-						// 	Livro livroEscolhido = admin.listarPorId(Integer.parseInt(idLivro));
-						// 	admin.addEmprestimo(new Emprestimo(livroEscolhido, admin));
-						// 	break;
-						// case "6":
-						// 	System.out.println("================ Aqui estão seus empréstimos ================");
-						// 	for (Emprestimo emprestimo : admin.getEmprestimos()) {
-						// 		System.out.println(emprestimo.toString());
-						// 	}
-							
-						// 	String idEmprestimo = Utils.printar("Digite o id do empréstimo que você deseja devolver");
-						// 	Emprestimo emprestimoDevolvido = admin.listarEmprestimosPorId(Integer.parseInt(idEmprestimo));
-						// 	admin.devolverEmprestimo(emprestimoDevolvido);
-							
-						// 	break;
 						case "8": // Deseja se deslogar
 							logadoAdmin = false;
 							System.out.println("\n Você será deslogado...\n");
